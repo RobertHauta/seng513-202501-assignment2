@@ -1,12 +1,20 @@
-class Quiz {
-    constructor(response) {
+import {QuizFetcher} from './Quiz_Generator.js';
+import {Question} from './Question.js';
+
+export class Quiz {
+    constructor(totalQuestions, category) {
         this.correct = 0;
-        this.total = response.results.length;
-        this.questions = this.makeQuizQuestions(response.results);
+        this.total = totalQuestions;
+        this.questions = [];//this.makeQuizQuestions(response.results);
         this.currentQuestionIndex = 0;
         this.loadNextQuestion = this.loadNextQuestion.bind(this);
         this.generator = this.getNextQuestion();
+        this.fetcher = new QuizFetcher();
+        this.category = category;
+        this.difficulty = "Easy";
+        this.correctInRow = 0;
     }
+
 
     getCurrentQuestion() {
         return this.questions[this.currentQuestionIndex];
@@ -17,19 +25,43 @@ class Quiz {
         this.currentQuestionIndex+=1;
     }
 
+    shiftDifficulty() {
+        if (this.correctInRow === 2) {
+            if (this.difficulty === "Easy") {
+                this.difficulty = "Medium";
+            } else if (this.difficulty === "Medium") {
+                this.difficulty = "Hard";
+            }
+            this.correctInRow = 0;
+        }
+        else if(this.correctInRow === -2) {
+            if (this.difficulty === "Hard") {
+                this.difficulty = "Medium";
+            } else if (this.difficulty === "Medium") {
+                this.difficulty = "Easy";
+            }
+            this.correctInRow = 0;
+        }
+    }
+
     guess(answer) {
         if(this.getCurrentQuestion().isCorrect(answer)) {
-            this.correct++; // Fix: use 'this.correct' instead of 'this.score'
+            this.correct++;
+            this.correctInRow++;
             return true;
         }
+        this.correctInRow > 0 ? this.correctInRow = -1 : this.correctInRow--; // Reset correctInRow when the user gets a wrong answer
         return false;
     }
 
     // Load next question by using the questions array
-    loadNextQuestion() {
-        const question = this.generator.next();
+    async loadNextQuestion() {
+        this.shiftDifficulty();
+
+        const question = await this.generator.next();
+        console.log(question);
         if (!question.done) {
-            question.value.displayQuestion();
+            question.value.displayQuestion(this);
         } else {
             const questionElement = document.getElementById('question');
             questionElement.innerHTML = `Quiz Ended!\n Score: ${this.correct/this.total*100}%`;
@@ -38,9 +70,21 @@ class Quiz {
         }
     }
 
-    *getNextQuestion() {
-        for (const question of this.questions) {
-            yield question;
+    async *getNextQuestion() {
+        for (let i = 0; i < this.total; i++) {
+            try{
+                const data = await this.fetcher.fetchQuestion(this.category, this.difficulty);
+                const question = new Question(data.results[0]);
+                if(!question) {
+                    throw new Error("Question not found");
+                }
+                this.questions.push(question);
+                yield question;
+            } catch(error) {
+                console.error(`Error fetching question: ${error}`);
+                console.log(this.fetcher.fetchQuestion(this.category, this.difficulty))
+                continue;
+            }
         }
     }
 

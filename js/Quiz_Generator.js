@@ -1,4 +1,4 @@
-class QuizFetcher {
+export class QuizFetcher {
     constructor() {
         this.keyValuesCategories = {
             "General Knowledge": 9,
@@ -34,8 +34,8 @@ class QuizFetcher {
         this.generalURL = "https://opentdb.com/api.php?";
     }
 
-    async fetchQuiz(category, difficulty, amount) {
-        let url = this.generalURL + "amount=" + amount;
+    async fetchQuestion(category, difficulty) {
+        let url = this.generalURL + "amount=" + 1;
         if (category) {
             url += "&category=" + this.keyValuesCategories[category];
         }
@@ -49,7 +49,7 @@ class QuizFetcher {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             if (data.response_code === 0) {
-                return new Quiz(data);
+                return data;
             } else {
                 throw new Error(`API Error: Response code ${data.response_code}`);
             }
@@ -59,19 +59,21 @@ class QuizFetcher {
     }
 }
 
-const quizFetcher = new QuizFetcher();
+//const quizFetcher = new QuizFetcher();
 
-const nextButton = document.getElementById("next-btn");
+// const nextButton = document.getElementById("next-btn");
+// let quiz;
+// setQuiz();
 
 async function setQuiz(topic, number) {
     let quizInstance = await quizFetcher.fetchQuiz(topic, "Medium", number);
     const boundLoadNextQuestion = quizInstance.loadNextQuestion.bind(quizInstance);
-
-    nextButton.addEventListener("click", boundLoadNextQuestion);
-
-    quizInstance.boundLoadNextQuestion = boundLoadNextQuestion;
-    return quizInstance;
 }
+
+//     nextButton.addEventListener("click", boundLoadNextQuestion);
+
+//     quiz.boundLoadNextQuestion = boundLoadNextQuestion;
+// }
 
 document.getElementById("start-quiz").addEventListener("click", function() {
     var topic = document.getElementById("topic").options[selectElement.selectedIndex].text;
