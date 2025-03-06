@@ -8,7 +8,48 @@
 </head>
 <body>
     <div class="container">
-        <h1>test</h1>
+        <h1>Welcome To QuizMania!</h1>
+        <h3>Your Highscore: </h3>
+
+        <p>Select Topic: <select name="topic" id="topic">
+            <option value="General Knowledge">General Knowledge</option>
+            <option value="Books">Books</option>
+            <option value="Film">Film</option>
+            <option value="Music">Music</option>
+            <option value="Musicals & Theatres">Musicals & Theatres</option>
+            <option value="Television">Television</option>
+            <option value="Video Games">Video Games</option>
+            <option value="Board Games">Board Games</option>
+            <option value="Science & Nature">Science & Nature</option>
+            <option value="Computers">Computers</option>
+            <option value="Mathematics">Mathematics</option>
+            <option value="Mythology">Mythology</option>
+            <option value="Sports">Sports</option>
+            <option value="Geography">Geography</option>
+            <option value="History">History</option>
+            <option value="Politics">Politics</option>
+            <option value="Art">Art</option>
+            <option value="Celebrities">Celebrities</option>
+            <option value="Animals">Animals</option>
+            <option value="Vehicles">Vehicles</option>
+            <option value="Comics">Comics</option>
+            <option value="Gadgets">Gadgets</option>
+            <option value="Japanese Anime & Manga">Japanese Anime & Manga</option>
+            <option value="Cartoon & Animations">Cartoon & Animations</option>
+        </select></p>
+
+        <p>Select Number of Questions:
+            <input type="radio" value="5" name="questions">
+            <label for="number5">5</label>
+            <input type="radio" value="10" name="questions">
+            <label for="number5">10</label>
+            <input type="radio" value="15" name="questions">
+            <label for="number5">15</label>
+        </p>
+
+        <a href="quizpage.html" id="start-quiz" class="button">Start Quiz</a>
     </div>
+
+    <script src="../js/Quiz_Generator.js"></script>
 </body>
 </html>

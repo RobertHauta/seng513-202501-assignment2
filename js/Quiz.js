@@ -34,7 +34,7 @@ class Quiz {
             const questionElement = document.getElementById('question');
             questionElement.innerHTML = `Quiz Ended!\n Score: ${this.correct/this.total*100}%`;
             const nextButton = document.getElementById('next-btn');
-            nextButton.style.display = 'none';
+            nextButton.value = 'Return to Home';
         }
     }
 
