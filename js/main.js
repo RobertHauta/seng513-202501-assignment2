@@ -1,6 +1,6 @@
 import { Quiz } from "./Quiz.js";
+import {User } from "./User.js";
 
-const nextButton = document.getElementById("next-btn");
 let quiz;
 onLoad();
 
@@ -10,6 +10,8 @@ async function onLoad(){
 }
 
 async function setQuiz(number, topic) {
+    const nextButton = document.getElementById("next-btn");
+
     if (!Number.isInteger(number)) {
         throw new Error("Number of questions must be an integer.");
     }
@@ -23,6 +25,7 @@ async function setQuiz(number, topic) {
 
 document.getElementById("login-btn").addEventListener("click", function(){
     document.getElementById("login-container").style.display = "none";
+    document.getElementById("quiz-container").style.display = "none";
     document.getElementById("homepage-container").style.display = "block";
 });
 
@@ -31,17 +34,21 @@ document.getElementById("login-form").addEventListener("submit", function(event)
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
     console.log("Username:", username, "Password:", password);
+    document.getElementById("welcome-username").innerHTML = `Welcome ${username}`;
 });
 
-document.getElementById("start-quiz").addEventListener("click", function() {
+document.getElementById("start-quiz").addEventListener("click", async function() {
     document.getElementById("quiz-container").style.display = "block";
     document.getElementById("homepage-container").style.display = "none";
+    document.getElementById("login-container").style.display = "none";
+
+    await resetQuiz();
 
     let topics = document.getElementById("topic");
     let topic = topics.options[topics.selectedIndex].text;
 
     let questions = document.getElementsByName("questions");
-    let questionNumber = 0;
+    let questionNumber = null;
     for (var i = 0; i < questions.length; i++) {
         if (questions[i].checked) {
             questionNumber = Number(questions[i].value);
@@ -49,5 +56,29 @@ document.getElementById("start-quiz").addEventListener("click", function() {
         }
     }
 
-    setQuiz(questionNumber, topic);
+    if(questionNumber){
+        setQuiz(questionNumber, topic);
+    }
 });
+
+document.getElementById("login-btn").addEventListener("click", function(){
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
+    user = new User(username, password);
+});
+
+async function resetQuiz(){
+    if(quiz){
+        quiz = null;
+    }
+
+    let oldButton = document.getElementById('next-btn');
+    let newButton = document.createElement('button');
+    newButton.textContent = 'Next Question';
+    newButton.className = 'button';
+    newButton.id = 'next-btn';
+    oldButton.parentNode.replaceChild(newButton, oldButton);
+    document.getElementById("next-btn").style.display = 'block';
+    document.getElementById("question").textContent = 'Click "Next Question" to start!';
+    document.getElementById("options-list").innerHTML = '';
+}

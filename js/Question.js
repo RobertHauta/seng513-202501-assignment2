@@ -45,6 +45,7 @@ export class Question {
         const oldbutton = document.getElementById('next-btn');
         const newButton = document.createElement('button');
         newButton.textContent = 'Submit';
+        newButton.className = 'button';
         newButton.id = 'next-btn';
         newButton.addEventListener('click', submitQuestion.bind(quiz));
         // Using Bind Here so function knows this is a Question object
@@ -83,6 +84,9 @@ var submitQuestion = function () {
     questionText.innerHTML = this.guess(user_answer) ? "Correct!" : "Incorrect!";
     this.incrementCurrentQuestion();
     button.innerHTML = "Next Question";
+    if(!this.isValid){
+        button.style.cssText = "background-color: #e91d2d";
+    }
     const newButton = button.cloneNode(true);
     button.parentNode.replaceChild(newButton, button);
     newButton.addEventListener("click", this.boundLoadNextQuestion);

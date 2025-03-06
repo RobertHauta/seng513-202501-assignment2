@@ -13,6 +13,7 @@ export class Quiz {
         this.category = category;
         this.difficulty = "Easy";
         this.correctInRow = 0;
+        this.isValid = true;
     }
 
 
@@ -56,17 +57,34 @@ export class Quiz {
 
     // Load next question by using the questions array
     async loadNextQuestion() {
+        if(!this.isValid){
+            return;
+        }
+
         this.shiftDifficulty();
 
         const question = await this.generator.next();
         console.log(question);
         if (!question.done) {
             question.value.displayQuestion(this);
+            this.isValid = false;
+            this.timeout5Seconds();
         } else {
             const questionElement = document.getElementById('question');
             questionElement.innerHTML = `Quiz Ended!\n Score: ${this.correct/this.total*100}%`;
             const nextButton = document.getElementById('next-btn');
             nextButton.style.display = 'none';
+            let homeButton = document.createElement('button');
+            homeButton.classList.add('button');
+            homeButton.id = 'next-btn';
+            homeButton.textContent = 'Return to Home';
+            homeButton.addEventListener('click', () => {
+                document.getElementById("login-container").style.display = "none";
+                document.getElementById("quiz-container").style.display = "none";
+                document.getElementById("homepage-container").style.display = "block";
+            });
+            nextButton.parentNode.replaceChild(homeButton, nextButton);
+            user.updateHighscore(this.correct/this.total*100, this.category);
         }
     }
 
@@ -99,5 +117,15 @@ export class Quiz {
 
     makeQuizQuestions(results) {
         return results.map(question => new Question(question));
+    }
+
+    async timeout5Seconds() {
+        await new Promise(resolve => setTimeout(resolve, 5000));
+        this.isValid = true;
+
+        const button = document.getElementById('next-btn');
+        if(button.innerHTML === 'Next Question'){
+            button.style.cssText = "background-color: #007bff";
+        }
     }
 }
