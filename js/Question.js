@@ -1,4 +1,4 @@
-class Question {
+export class Question {
     constructor(question) {
         this.category = question.category;
         this.question = question.question;
@@ -12,7 +12,7 @@ class Question {
         return this.answer === answer;
     }
 
-    displayQuestion() {
+    displayQuestion(quiz) {
         const questionContainer = document.getElementById('quiz-container');
 
         const questionText = document.getElementById('question');
@@ -42,11 +42,13 @@ class Question {
         });
         this.setOptionInputRule();
 
-        let button = document.getElementById('next-btn');
-        button.innerHTML = 'Confirm';
-        button.removeEventListener("click", quiz.boundLoadNextQuestion);
+        const oldbutton = document.getElementById('next-btn');
+        const newButton = document.createElement('button');
+        newButton.textContent = 'Submit';
+        newButton.id = 'next-btn';
+        newButton.addEventListener('click', submitQuestion.bind(quiz));
         // Using Bind Here so function knows this is a Question object
-        button.addEventListener('click', submitQuestion.bind(this));
+        oldbutton.parentNode.replaceChild(newButton, oldbutton);
 
         return questionContainer;
     }
@@ -72,16 +74,16 @@ var submitQuestion = function () {
     const button = document.getElementById('next-btn');
     const optionsContainer = document.getElementById('options-list');
     const questionText = document.getElementById('question');
-    let user_answer = quiz.getSelectedAnswer();
+    let user_answer = this.getSelectedAnswer();
 
     while (optionsContainer.firstChild) {
         optionsContainer.removeChild(optionsContainer.firstChild);
     }
 
-    questionText.innerHTML = quiz.guess(user_answer) ? "Correct!" : "Incorrect!";
-    quiz.incrementCurrentQuestion();
+    questionText.innerHTML = this.guess(user_answer) ? "Correct!" : "Incorrect!";
+    this.incrementCurrentQuestion();
     button.innerHTML = "Next Question";
     const newButton = button.cloneNode(true);
     button.parentNode.replaceChild(newButton, button);
-    newButton.addEventListener("click", quiz.boundLoadNextQuestion);
+    newButton.addEventListener("click", this.boundLoadNextQuestion);
 }

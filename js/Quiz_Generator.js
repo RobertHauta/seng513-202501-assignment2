@@ -1,4 +1,4 @@
-class QuizFetcher {
+export class QuizFetcher {
     constructor() {
         this.keyValuesCategories = {
             "General Knowledge": 9,
@@ -34,8 +34,8 @@ class QuizFetcher {
         this.generalURL = "https://opentdb.com/api.php?";
     }
 
-    async fetchQuiz(category, difficulty, amount) {
-        let url = this.generalURL + "amount=" + amount;
+    async fetchQuestion(category, difficulty) {
+        let url = this.generalURL + "amount=" + 1;
         if (category) {
             url += "&category=" + this.keyValuesCategories[category];
         }
@@ -49,7 +49,7 @@ class QuizFetcher {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             if (data.response_code === 0) {
-                return new Quiz(data);
+                return data;
             } else {
                 throw new Error(`API Error: Response code ${data.response_code}`);
             }
@@ -59,23 +59,24 @@ class QuizFetcher {
     }
 }
 
-const quizFetcher = new QuizFetcher();
+//const quizFetcher = new QuizFetcher();
 
-const nextButton = document.getElementById("next-btn");
+// const nextButton = document.getElementById("next-btn");
+// let quiz;
+// setQuiz();
 
-async function setQuiz() {
-    let quizInstance = await quizFetcher.fetchQuiz("Mathematics", "Hard", 5);
-    const boundLoadNextQuestion = quizInstance.loadNextQuestion.bind(quizInstance);
+// async function setQuiz() {
+//     quiz = new Quiz(4, "Comics");
+//     const boundLoadNextQuestion = quiz.loadNextQuestion.bind(quiz);
 
-    nextButton.addEventListener("click", boundLoadNextQuestion);
+//     nextButton.addEventListener("click", boundLoadNextQuestion);
 
-    quizInstance.boundLoadNextQuestion = boundLoadNextQuestion;
-    return quizInstance;
-}
+//     quiz.boundLoadNextQuestion = boundLoadNextQuestion;
+// }
 
 // Set the quiz and ensure it's fully resolved before using it
-setQuiz().then(qui => {
+/*setQuiz().then(qui => {
     quiz = qui;
 }).catch(error => {
     console.error('Error setting quiz:', error);
-});
+});*/
