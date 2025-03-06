@@ -16,7 +16,7 @@ class User{
     }
 }
 
-document.getElementById("loginButton").addEventListener("click", function(){
+document.getElementById("login-btn").addEventListener("click", function(){
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
     var user = new User(username, password);
