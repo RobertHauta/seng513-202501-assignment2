@@ -26,6 +26,13 @@ document.getElementById("login-btn").addEventListener("click", function(){
     document.getElementById("homepage-container").style.display = "block";
 });
 
+document.getElementById("login-form").addEventListener("submit", function(event) {
+    event.preventDefault(); // Stops the form from refreshing the page
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+    console.log("Username:", username, "Password:", password);
+});
+
 document.getElementById("start-quiz").addEventListener("click", function() {
     document.getElementById("quiz-container").style.display = "block";
     document.getElementById("homepage-container").style.display = "none";
