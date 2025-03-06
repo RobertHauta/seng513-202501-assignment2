@@ -5,7 +5,7 @@ export class Quiz {
     constructor(totalQuestions, category) {
         this.correct = 0;
         this.total = totalQuestions;
-        this.questions = [];//this.makeQuizQuestions(response.results);
+        this.questions = [];
         this.currentQuestionIndex = 0;
         this.loadNextQuestion = this.loadNextQuestion.bind(this);
         this.generator = this.getNextQuestion();
@@ -66,7 +66,7 @@ export class Quiz {
             const questionElement = document.getElementById('question');
             questionElement.innerHTML = `Quiz Ended!\n Score: ${this.correct/this.total*100}%`;
             const nextButton = document.getElementById('next-btn');
-            nextButton.value = 'Return to Home';
+            nextButton.style.display = 'none';
         }
     }
 
