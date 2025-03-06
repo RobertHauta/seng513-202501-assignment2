@@ -68,12 +68,12 @@ export class QuizFetcher {
 async function setQuiz(topic, number) {
     let quizInstance = await quizFetcher.fetchQuiz(topic, "Medium", number);
     const boundLoadNextQuestion = quizInstance.loadNextQuestion.bind(quizInstance);
-}
 
 //     nextButton.addEventListener("click", boundLoadNextQuestion);
 
-//     quiz.boundLoadNextQuestion = boundLoadNextQuestion;
-// }
+    quizInstance.boundLoadNextQuestion = boundLoadNextQuestion;
+    return quizInstance;
+}
 
 document.getElementById("start-quiz").addEventListener("click", function() {
     var topic = document.getElementById("topic").options[selectElement.selectedIndex].text;
@@ -87,11 +87,9 @@ document.getElementById("start-quiz").addEventListener("click", function() {
         }
     }
 
-    // Set the quiz and ensure it's fully resolved before using it
-    setQuiz(topic, questionNumber).then(qui => {
-        quiz = qui;
-    }).catch(error => {
-        console.error('Error setting quiz:', error);
-    });
-});
-
+// Set the quiz and ensure it's fully resolved before using it
+/*setQuiz().then(qui => {
+    quiz = qui;
+}).catch(error => {
+    console.error('Error setting quiz:', error);
+});*/
