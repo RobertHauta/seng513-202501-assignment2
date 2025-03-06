@@ -37,7 +37,8 @@ document.getElementById("start-quiz").addEventListener("click", function() {
     document.getElementById("quiz-container").style.display = "block";
     document.getElementById("homepage-container").style.display = "none";
 
-    let topic = document.getElementById("topic").options[selectElement.selectedIndex].text;
+    let topics = document.getElementById("topic");
+    let topic = topics.options[topics.selectedIndex].text;
 
     let questions = document.getElementsByName("questions");
     let questionNumber = 0;
