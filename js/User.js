@@ -3,6 +3,16 @@ class User{
         this.username = name;
         this.password = password;
         this.highscore = 0;
+        this.highscoreHistory = [];
+    }
+
+    updateHighscore(score, category){
+        const match = this.highscoreHistory.find(history => history.category === category);
+        if(match){
+            
+        }
+        this.highscore = Math.max(this.highscore, score);
+        this.highscoreHistory.push(score);
     }
 }
 

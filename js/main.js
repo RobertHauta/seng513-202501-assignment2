@@ -2,7 +2,6 @@ import { Quiz } from "./Quiz.js";
 
 const nextButton = document.getElementById("next-btn");
 let quiz;
-setQuiz();
 onLoad();
 
 async function onLoad(){
