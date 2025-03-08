@@ -35,6 +35,7 @@ document.getElementById("login-form").addEventListener("submit", function(event)
     event.preventDefault(); // Stops the form from refreshing the page
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
+    user = new User(username, password);
     console.log("Username:", username, "Password:", password);
     document.getElementById("welcome-username").innerHTML = `Welcome ${username}`;
 });
@@ -62,12 +63,6 @@ document.getElementById("start-quiz").addEventListener("click", async function()
         document.getElementById("highscore-container").style.display = "none";
         document.getElementById("login-container").style.display = "none";
     }
-});
-
-document.getElementById("login-btn").addEventListener("click", function(){
-    let username = document.getElementById("username").value;
-    let password = document.getElementById("password").value;
-    user = new User(username, password);
 });
 
 async function resetQuiz(){

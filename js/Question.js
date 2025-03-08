@@ -77,11 +77,7 @@ var submitQuestion = function () {
     const options = optionsContainer.querySelectorAll('li');
     const questionText = document.getElementById('question');
     let user_answer = this.getSelectedAnswer();
-
-    //while (optionsContainer.firstChild) {
-        //optionsContainer.removeChild(optionsContainer.firstChild);
-    //}
-
+    
     let i = 0;
     options.forEach(li => {
         const optionInput = document.getElementById(`option-${i}`);

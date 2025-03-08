@@ -72,6 +72,10 @@ export class Quiz {
         } else {
             const questionElement = document.getElementById('question');
             questionElement.innerHTML = `Quiz Ended!\n Score: ${this.correct/this.total*100}%`;
+            const optionsContainer = document.getElementById('options-list');
+            while (optionsContainer.firstChild) {
+                optionsContainer.removeChild(optionsContainer.firstChild);
+            }
             const nextButton = document.getElementById('next-btn');
             nextButton.style.display = 'none';
             let homeButton = document.createElement('button');
