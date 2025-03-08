@@ -74,14 +74,25 @@ export class Question {
 var submitQuestion = function () {
     const button = document.getElementById('next-btn');
     const optionsContainer = document.getElementById('options-list');
+    const options = optionsContainer.querySelectorAll('li');
     const questionText = document.getElementById('question');
     let user_answer = this.getSelectedAnswer();
 
-    while (optionsContainer.firstChild) {
-        optionsContainer.removeChild(optionsContainer.firstChild);
-    }
+    //while (optionsContainer.firstChild) {
+        //optionsContainer.removeChild(optionsContainer.firstChild);
+    //}
 
-    questionText.innerHTML = this.guess(user_answer) ? "Correct!" : "Incorrect!";
+    let i = 0;
+    options.forEach(li => {
+        const optionInput = document.getElementById(`option-${i}`);
+        if(optionInput.value == this.answer) { //shit broke
+            li.style.color = 'green';
+        }
+        li.style.color = 'red';
+        i++;
+    });
+
+    questionText.innerHTML = this.guess(user_answer) ? `Correct! \nYour score is currently: ${this.correct} out of ${this.total}` : `Incorrect! \nYour score is currently: ${this.correct} out of ${this.total}`;
     this.incrementCurrentQuestion();
     button.innerHTML = "Next Question";
     if(!this.isValid){

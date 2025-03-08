@@ -81,7 +81,8 @@ export class Quiz {
             homeButton.addEventListener('click', () => {
                 document.getElementById("login-container").style.display = "none";
                 document.getElementById("quiz-container").style.display = "none";
-                document.getElementById("homepage-container").style.display = "block";
+                document.getElementById("homepage-container").style.display = "flex";
+                document.getElementById("highscore-container").style.display = "flex";
             });
             nextButton.parentNode.replaceChild(homeButton, nextButton);
             user.updateHighscore(this.correct/this.total*100, this.category);

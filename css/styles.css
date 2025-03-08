@@ -6,6 +6,10 @@ body {
 }
 
 .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     margin-top: 20px;
     border: 1px solid #ccc;
     padding: 20px;
@@ -24,10 +28,11 @@ body {
     border-radius: 5px;
 }
 
-button:hover {
+.button:hover {
     background-color: #0056b3;
 }
 
 ul {
-    list-style-type: none !important;
+    list-style-type: none;
+    text-align: left;
 }

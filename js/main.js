@@ -7,6 +7,7 @@ onLoad();
 async function onLoad(){
     document.getElementById("quiz-container").style.display = "none";
     document.getElementById("homepage-container").style.display = "none";
+    document.getElementById("highscore-container").style.display = "none";
 }
 
 async function setQuiz(number, topic) {
@@ -26,7 +27,8 @@ async function setQuiz(number, topic) {
 document.getElementById("login-btn").addEventListener("click", function(){
     document.getElementById("login-container").style.display = "none";
     document.getElementById("quiz-container").style.display = "none";
-    document.getElementById("homepage-container").style.display = "block";
+    document.getElementById("homepage-container").style.display = "flex";
+    document.getElementById("highscore-container").style.display = "flex";
 });
 
 document.getElementById("login-form").addEventListener("submit", function(event) {
@@ -38,10 +40,6 @@ document.getElementById("login-form").addEventListener("submit", function(event)
 });
 
 document.getElementById("start-quiz").addEventListener("click", async function() {
-    document.getElementById("quiz-container").style.display = "block";
-    document.getElementById("homepage-container").style.display = "none";
-    document.getElementById("login-container").style.display = "none";
-
     await resetQuiz();
 
     let topics = document.getElementById("topic");
@@ -58,6 +56,11 @@ document.getElementById("start-quiz").addEventListener("click", async function()
 
     if(questionNumber){
         setQuiz(questionNumber, topic);
+
+        document.getElementById("quiz-container").style.display = "flex";
+        document.getElementById("homepage-container").style.display = "none";
+        document.getElementById("highscore-container").style.display = "none";
+        document.getElementById("login-container").style.display = "none";
     }
 });
 
