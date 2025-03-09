@@ -63,6 +63,11 @@ document.getElementById("start-quiz").addEventListener("click", async function()
     }
 });
 
+document.getElementById("topic").addEventListener("change", function() {
+    let topic = this.options[this.selectedIndex].text;
+    document.getElementById("user-highscore").innerHTML = `Your Highscores in ${topic}`;
+});
+
 async function resetQuiz(){
     if(quiz){
         quiz = null;
