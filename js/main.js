@@ -2,7 +2,7 @@ import { Quiz } from "./Quiz.js";
 import {User } from "./User.js";
 
 let quiz;
-let user;
+
 onLoad();
 
 async function onLoad(){
@@ -64,7 +64,9 @@ document.getElementById("start-quiz").addEventListener("click", async function()
     }
 });
 
-document.getElementById("topic").addEventListener("change", user.showHighscore);
+document.getElementById("topic").addEventListener("change", function(){
+    user.showHighscore();
+});
 
 async function resetQuiz(){
     if(quiz){
