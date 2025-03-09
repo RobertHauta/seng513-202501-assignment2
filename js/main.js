@@ -24,13 +24,6 @@ async function setQuiz(number, topic) {
     quiz.boundLoadNextQuestion = boundLoadNextQuestion;
 }
 
-document.getElementById("login-btn").addEventListener("click", function(){
-    document.getElementById("login-container").style.display = "none";
-    document.getElementById("quiz-container").style.display = "none";
-    document.getElementById("homepage-container").style.display = "flex";
-    document.getElementById("highscore-container").style.display = "flex";
-});
-
 document.getElementById("login-form").addEventListener("submit", function(event) {
     event.preventDefault(); // Stops the form from refreshing the page
     const username = document.getElementById("username").value;
@@ -38,6 +31,11 @@ document.getElementById("login-form").addEventListener("submit", function(event)
     user = new User(username, password);
     console.log("Username:", username, "Password:", password);
     document.getElementById("welcome-username").innerHTML = `Welcome ${username}`;
+
+    document.getElementById("login-container").style.display = "none";
+    document.getElementById("quiz-container").style.display = "none";
+    document.getElementById("homepage-container").style.display = "flex";
+    document.getElementById("highscore-container").style.display = "flex";
 });
 
 document.getElementById("start-quiz").addEventListener("click", async function() {
