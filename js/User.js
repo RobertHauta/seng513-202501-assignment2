@@ -21,4 +21,16 @@ export class User{
         }
         return match.scores.sort();
     }
+
+    displayHighscore(category){
+        const highscoreContainer = document.getElementById('highscores-list');
+        let scores = this.getHighscore(category);
+        console.log(scores);
+        scores.forEach(score => {
+            const scoreLabel = document.createElement('li');
+            scoreLabel.className = 'score-label';
+            scoreLabel.innerHTML = score;
+            highscoreContainer.appendChild(scoreLabel);
+        });
+    }
 }

@@ -2,6 +2,7 @@ import { Quiz } from "./Quiz.js";
 import {User } from "./User.js";
 
 let quiz;
+let user;
 onLoad();
 
 async function onLoad(){
@@ -31,6 +32,11 @@ document.getElementById("login-form").addEventListener("submit", function(event)
     user = new User(username, password);
     console.log("Username:", username, "Password:", password);
     document.getElementById("welcome-username").innerHTML = `Welcome ${username}`;
+
+    let topics = document.getElementById("topic");
+    let topic = topics.options[topics.selectedIndex].text;
+    document.getElementById("user-highscore").innerHTML = `Your Highscores in ${topic}`;
+    //user.displayHighscore(topic);
 
     document.getElementById("login-container").style.display = "none";
     document.getElementById("quiz-container").style.display = "none";
@@ -66,6 +72,7 @@ document.getElementById("start-quiz").addEventListener("click", async function()
 document.getElementById("topic").addEventListener("change", function() {
     let topic = this.options[this.selectedIndex].text;
     document.getElementById("user-highscore").innerHTML = `Your Highscores in ${topic}`;
+    user.displayHighscore(topic);
 });
 
 async function resetQuiz(){
