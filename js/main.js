@@ -17,7 +17,7 @@ async function setQuiz(number, topic) {
     if (!Number.isInteger(number)) {
         throw new Error("Number of questions must be an integer.");
     }
-    quiz = new Quiz(number, topic);
+    quiz = new Quiz(number, topic, user);
     const boundLoadNextQuestion = quiz.loadNextQuestion.bind(quiz);
 
     nextButton.addEventListener("click", boundLoadNextQuestion);
@@ -32,11 +32,6 @@ document.getElementById("login-form").addEventListener("submit", function(event)
     user = new User(username, password);
     console.log("Username:", username, "Password:", password);
     document.getElementById("welcome-username").innerHTML = `Welcome ${username}`;
-
-    let topics = document.getElementById("topic");
-    let topic = topics.options[topics.selectedIndex].text;
-    document.getElementById("user-highscore").innerHTML = `Your Highscores in ${topic}`;
-    //user.displayHighscore(topic);
 
     document.getElementById("login-container").style.display = "none";
     document.getElementById("quiz-container").style.display = "none";
@@ -69,11 +64,7 @@ document.getElementById("start-quiz").addEventListener("click", async function()
     }
 });
 
-document.getElementById("topic").addEventListener("change", function() {
-    let topic = this.options[this.selectedIndex].text;
-    document.getElementById("user-highscore").innerHTML = `Your Highscores in ${topic}`;
-    user.displayHighscore(topic);
-});
+document.getElementById("topic").addEventListener("change", user.showHighscore);
 
 async function resetQuiz(){
     if(quiz){

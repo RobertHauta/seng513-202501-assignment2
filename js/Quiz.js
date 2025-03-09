@@ -2,7 +2,7 @@ import {QuizFetcher} from './Quiz_Generator.js';
 import {Question} from './Question.js';
 
 export class Quiz {
-    constructor(totalQuestions, category) {
+    constructor(totalQuestions, category, user) {
         this.correct = 0;
         this.total = totalQuestions;
         this.questions = [];
@@ -10,6 +10,7 @@ export class Quiz {
         this.loadNextQuestion = this.loadNextQuestion.bind(this);
         this.generator = this.getNextQuestion();
         this.fetcher = new QuizFetcher();
+        this.user = user;
         this.category = category;
         this.difficulty = "Easy";
         this.correctInRow = 0;
@@ -87,9 +88,10 @@ export class Quiz {
                 document.getElementById("quiz-container").style.display = "none";
                 document.getElementById("homepage-container").style.display = "flex";
                 document.getElementById("highscore-container").style.display = "flex";
+                this.user.showHighscore();
             });
             nextButton.parentNode.replaceChild(homeButton, nextButton);
-            user.updateHighscore(this.correct/this.total*100, this.category);
+            this.user.updateHighscore(this.correct/this.total*100, this.category);
         }
     }
 
