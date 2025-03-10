@@ -68,7 +68,7 @@ document.getElementById("topic").addEventListener("change", function(){
     user.showHighscore();
 });
 
-document.getElementById("app-name").addEventListener("click", function(event) {
+document.getElementById("app-name").addEventListener("click", function() {
     document.getElementById("login-container").style.display = "flex";
     document.getElementById("quiz-container").style.display = "none";
     document.getElementById("homepage-container").style.display = "none";
@@ -77,6 +77,10 @@ document.getElementById("app-name").addEventListener("click", function(event) {
     document.getElementById("username").value = "";
     document.getElementById("password").value = "";
     document.getElementById("topic").selectedIndex = 0;
+    let radioButtons = document.getElementsByName('questions');
+    radioButtons.forEach(function(radioButton) {
+        radioButton.checked = false;
+    });
 });
 
 
