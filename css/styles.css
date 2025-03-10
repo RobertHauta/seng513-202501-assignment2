@@ -2,9 +2,21 @@
     --bg-color: #0a0a0a;
     --card-bg: #1a1a2e; 
     --text-color: #e0e0e0; 
-    --primary-accent: #d4af37; 
+    --primary-accent: #FFD700; 
     --secondary-accent: #ff0055; 
 }
+
+/* @keyframes pulseGlowGold {
+    0% { box-shadow: 0 0 8px rgba(212, 175, 55, 0.5); }
+    50% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.8); }
+    100% { box-shadow: 0 0 8px rgba(212, 175, 55, 0.5); }
+}
+
+@keyframes pulseGlowRed {
+    0% { box-shadow: 0 0 8px rgba(255, 0, 85, 0.5); }
+    50% { box-shadow: 0 0 15px rgba(255, 0, 85, 0.8); }
+    100% { box-shadow: 0 0 8px rgba(255, 0, 85, 0.5); }
+} */
 
 h1 {
     color: var(--primary-accent);
@@ -41,11 +53,14 @@ body {
     background: var(--card-bg);
     padding: 20px;
     box-shadow: 0px 0px 20px var(--secondary-accent);
+    /* animation: pulseGlowRed 1.5s infinite; */
     transition: all 0.3s ease-in-out;
 }
 
 .container:hover {
     box-shadow: 0px 0px 50px var(--secondary-accent);
+    /* animation: pulseGlowRed 1s infinite; */
+    transition: all 0.3s ease-in-out;
 }
 
 .button {
@@ -198,3 +213,8 @@ input[type="radio"]:hover {
     border-color: var(--secondary-accent);
 }
 
+@keyframes pulseGlowGold {
+    0% { box-shadow: 0 0 8px rgba(212, 175, 55, 0.5); }
+    50% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.8); }
+    100% { box-shadow: 0 0 8px rgba(212, 175, 55, 0.5); }
+}
