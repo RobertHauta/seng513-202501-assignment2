@@ -80,11 +80,14 @@ var submitQuestion = function () {
     
     let i = 0;
     options.forEach(li => {
+        let ans = this.getCurrentQuestion().answer;
         const optionInput = document.getElementById(`option-${i}`);
-        if(optionInput.value == this.answer) { //shit broke
+        if(optionInput.value === ans) { //shit broke
             li.style.color = 'green';
         }
-        li.style.color = 'red';
+        else{
+            li.style.color = 'red';
+        }
         i++;
     });
 
