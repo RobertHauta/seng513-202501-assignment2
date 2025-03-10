@@ -132,7 +132,7 @@ export class Quiz {
 
         const button = document.getElementById('next-btn');
         if(button.innerHTML === 'Next Question'){
-            button.style.cssText = "background-color: #007bff";
+            button.style.cssText = "background-color: #0a0a0a";
         }
     }
 }

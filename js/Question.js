@@ -82,7 +82,7 @@ var submitQuestion = function () {
     options.forEach(li => {
         let ans = this.getCurrentQuestion().answer;
         const optionInput = document.getElementById(`option-${i}`);
-        if(optionInput.value === ans) { //shit broke
+        if(optionInput.value === ans) {
             li.style.color = 'green';
         }
         else{
@@ -95,7 +95,7 @@ var submitQuestion = function () {
     this.incrementCurrentQuestion();
     button.innerHTML = "Next Question";
     if(!this.isValid){
-        button.style.cssText = "background-color: #e91d2d";
+        button.style.cssText = "background-color: #ff0055";
     }
     const newButton = button.cloneNode(true);
     button.parentNode.replaceChild(newButton, button);
