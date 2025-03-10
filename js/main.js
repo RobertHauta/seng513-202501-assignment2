@@ -68,6 +68,18 @@ document.getElementById("topic").addEventListener("change", function(){
     user.showHighscore();
 });
 
+document.getElementById("app-name").addEventListener("click", function(event) {
+    document.getElementById("login-container").style.display = "flex";
+    document.getElementById("quiz-container").style.display = "none";
+    document.getElementById("homepage-container").style.display = "none";
+    document.getElementById("highscore-container").style.display = "none";
+
+    document.getElementById("username").value = "";
+    document.getElementById("password").value = "";
+    document.getElementById("topic").selectedIndex = 0;
+});
+
+
 async function resetQuiz(){
     if(quiz){
         quiz = null;
