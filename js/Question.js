@@ -48,7 +48,7 @@ export class Question {
         newButton.className = 'button';
         newButton.id = 'next-btn';
         newButton.addEventListener('click', submitQuestion.bind(quiz));
-        // Using Bind Here so function knows this is a Question object
+        // Using Bind Here so function knows this is a Quiz object
         oldbutton.parentNode.replaceChild(newButton, oldbutton);
 
         return questionContainer;
