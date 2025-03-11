@@ -27,6 +27,7 @@ export class User{
         while (highscoreContainer.firstChild) {
             highscoreContainer.removeChild(highscoreContainer.firstChild);
         }
+        if(!this.getHighscore(category)){return;}
         let scores = this.getHighscore(category).reverse();
         scores.forEach(score => {
             const scoreLabel = document.createElement('li');
