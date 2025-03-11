@@ -81,6 +81,7 @@ document.getElementById("app-name").addEventListener("click", function() {
     radioButtons.forEach(function(radioButton) {
         radioButton.checked = false;
     });
+    user.showHighscore();
 });
 
 
